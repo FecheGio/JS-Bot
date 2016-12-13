@@ -1,0 +1,16 @@
+{
+  "name": "JS-Bot",
+  "version": "0.1.0",
+  "description": "a JS powered twitter bot",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "repository": "https://github.com/FecheGio/JS-Bot.git",
+  "author": "FecheGio",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^2.0.0",
+    "twitter": "^1.7.0"
+  }
+}
