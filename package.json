@@ -7,6 +7,7 @@
   "author": "FecheGio",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^2.0.0",
     "twitter": "^1.7.0"
   }
 }
