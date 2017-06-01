@@ -5,8 +5,8 @@ var tweetLogger = require('./logger')
 var userAuth = require('./config').userAuth
 
 /**
- * Useful
  *
+ * Useful
  * Name: tweet.author.name
  * Screen-name (@tweet.author.screen_name): tweet.author.screen_name
  * Date (UTC): tweet.created_at
@@ -20,20 +20,30 @@ var bot = new twitter(userAuth)
 
 // Stream tweets
 // mostrará solo los tweets con la propiedad de 'track:'
-bot.stream('statuses/filter', {track: '#sarasabot'}, function(stream) {
-  stream.on('data', function(tweet) {g
+bot.stream('statuses/filter', {track: '#sarasa'}, function(stream) {
+  stream.on('data', function(tweet) {
 
     // muestra en consola el tweet que contenga dicha propiedad
     tweetLogger.in(tweet.text)
 
-    // respuesta genérica, solo menciona, no responde
-    var botReply = {
-      in_reply_to_status_id: tweet.id,
-      status: `Hola @${tweet.user.screen_name} .`
-    }
+    // arreglo de objetos, cada objeto corresponde a una respuesta automatica
+    // que respone a un numero aleatorio (botReply[i])
+    
+    var botReply = [{
+      in_reply_to_status_id: tweet.id_str,
+      status: `@${tweet.user.screen_name} esto es una respuesta automática 1`
+    },
+    {
+      in_reply_to_status_id: tweet.id_str,
+      status: `@${tweet.user.screen_name} esto es una respuesta automatica 2`
+    },
+    {
+      in_reply_to_status_id: tweet.id_str,
+      status: `@${tweet.user.screen_name} esto es una respuesta automatica 3`
+    }]
 
     // publica la respuesta
-    bot.post('statuses/update', botReply,  function(err, tweetReply){
+    bot.post('statuses/update', botReply[(Math.floor(Math.random()*3))],  function(err, tweetReply){
       if (err) {
         console.error(err)
         return err
@@ -43,3 +53,5 @@ bot.stream('statuses/filter', {track: '#sarasabot'}, function(stream) {
     })
   })
 })
+
+//cuando usas este hashtag, además de quedar en ridículo, estás minimizando y invisibilizando la lucha de las mujeres, imbécil.
